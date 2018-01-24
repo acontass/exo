@@ -30,7 +30,7 @@ class TableViewController: UITableViewController {
      - remark: With DateFormatter version.
      */
     
-    private func sortEvents(json: [NSDictionary]) -> [[NSDictionary]] {
+/*    private func sortEvents(json: [NSDictionary]) -> [[NSDictionary]] {
         var ret: [[NSDictionary]] = []
         var idx = 0
         while idx < json.count {
@@ -55,14 +55,8 @@ class TableViewController: UITableViewController {
                 }
             }
         }
-/*        for array in ret {
-            for element in array {
-                print(element["dateStart"] as! String)
-            }
-            print()
-        }*/
         return ret
-    }
+    }*/
     
     /**
      Sort events by dates.
@@ -74,7 +68,7 @@ class TableViewController: UITableViewController {
      - remark: without DateFormatter version.
      */
     
-/*    private func sortEvents(json: [NSDictionary]) -> [[NSDictionary]] {
+    private func sortEvents(json: [NSDictionary]) -> [[NSDictionary]] {
         var ret: [[NSDictionary]] = []
         var idx = 0
         while idx < json.count {
@@ -100,7 +94,7 @@ class TableViewController: UITableViewController {
             }
         }
         return ret
-    }*/
+    }
     
     /// Called at pull to refresh.
     
@@ -124,6 +118,9 @@ class TableViewController: UITableViewController {
                             if !json.isEmpty {
                                 self.data = self.sortEvents(json: json)
                             }
+                            UIView.animate(withDuration: 0.5) {
+                                self.tableView.alpha = 1
+                            }
                             self.tableView.reloadData()
                         }
                     }
@@ -144,6 +141,7 @@ class TableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.alpha = 0
         clearsSelectionOnViewWillAppear = true
         
         tableView.refreshControl = UIRefreshControl()
@@ -164,8 +162,7 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        print((data[section].first!["dateStart"] as! String) + " : " + (data[section].first!["dateStart"] as? String)!.utcToString(to: "MMMM YYYY")!)
-        return (data[section].first!["dateStart"] as? String)?.utcToString(to: "MMMM YYYY")
+        return (data[section].first!["dateStart"] as? String)?.utcToString(to: "MMMM yyyy")
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
