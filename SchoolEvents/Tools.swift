@@ -28,7 +28,7 @@ struct Tools {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         for elem in buttons {
             if let button = elem as? String {
-                alert.addAction(UIAlertAction(title: button, style: (button != "Cancel") ? UIAlertActionStyle.default : UIAlertActionStyle.cancel, handler: { (action) in
+                alert.addAction(UIAlertAction(title: button, style: (button != "Annuler") ? UIAlertActionStyle.default : UIAlertActionStyle.cancel, handler: { (action) in
                     completion?(button)
                 }))
             }

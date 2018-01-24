@@ -106,10 +106,11 @@ class TableViewController: UITableViewController {
                 data, response, error in
                 DispatchQueue.main.async {
                     self.tableView.refreshControl?.endRefreshing()
-                }
-                if let error = error {
-                    debugPrint(error.localizedDescription)
-                    return
+                    if let error = error {
+                        let alert = Tools.createAlert(title: "Erreur", message: error.localizedDescription, buttons: "Cancel", completion: nil)
+                        self.present(alert, animated: true, completion: nil)
+                        return
+                    }
                 }
                 if let unwrappedData = data {
                     do {
@@ -118,14 +119,15 @@ class TableViewController: UITableViewController {
                             if !json.isEmpty {
                                 self.data = self.sortEvents(json: json)
                             }
-                            UIView.animate(withDuration: 0.5) {
+                            UIView.animate(withDuration: 0.2) {
                                 self.tableView.alpha = 1
                             }
                             self.tableView.reloadData()
                         }
                     }
                     catch let error {
-                        debugPrint(error.localizedDescription)
+                        let alert = Tools.createAlert(title: "Erreur", message: error.localizedDescription, buttons: "Cancel", completion: nil)
+                        self.present(alert, animated: true, completion: nil)
                     }
                 }
             }

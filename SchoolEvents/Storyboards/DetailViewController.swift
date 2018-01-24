@@ -70,7 +70,7 @@ class DetailViewController: UIViewController {
     
     @IBAction func shareTouched() {
         let activityVC = UIActivityViewController(activityItems: [titleLabel.text ?? "", contentTextView.text], applicationActivities: nil)
-        activityVC.setValue("test", forKey: "subject")
+//        activityVC.setValue("test", forKey: "subject")
         self.present(activityVC, animated: true, completion: nil)
     }
     
@@ -101,11 +101,11 @@ class DetailViewController: UIViewController {
                         self.present(alert, animated: true, completion: nil)
                         return
                     }
-                    let alert = Tools.createAlert(title: nil, message: "Added to your calendar.", buttons: "Ok", completion: nil)
+                    let alert = Tools.createAlert(title: nil, message: "Évènement ajouté au calendrier.", buttons: "Ok", completion: nil)
                     self.present(alert, animated: true, completion: nil)
                 }
                 else {
-                    let alert = Tools.createAlert(title: nil, message: "Error.", buttons: "Cancel", completion: nil)
+                    let alert = Tools.createAlert(title: nil, message: "Erreur.", buttons: "Annuler", completion: nil)
                     self.present(alert, animated: true, completion: nil)
                 }
             }
