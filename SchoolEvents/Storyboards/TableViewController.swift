@@ -162,10 +162,6 @@ class TableViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return data.count
     }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return (data[section].first!["dateStart"] as? String)?.utcToString(to: "MMMM yyyy")
-    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data[section].count
@@ -175,6 +171,18 @@ class TableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell", for: indexPath) as! EventTableViewCell
         cell.event = data[indexPath.section][indexPath.row]
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view  = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 30))
+        let value: CGFloat = 68 / 255
+        view.backgroundColor = UIColor(red: value, green: value, blue: value, alpha: 1)
+
+        let label = UILabel(frame: CGRect(x: 16, y: 0, width: UIScreen.main.bounds.width - 16, height: view.frame.height))
+        label.textColor = .white
+        label.text = (data[section].first!["dateStart"] as? String)?.utcToString(to: "MMMM yyyy")
+        view.addSubview(label)
+        return view
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
