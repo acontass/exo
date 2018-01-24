@@ -55,12 +55,12 @@ class TableViewController: UITableViewController {
                 }
             }
         }
-        for array in ret {
+/*        for array in ret {
             for element in array {
                 print(element["dateStart"] as! String)
             }
             print()
-        }
+        }*/
         return ret
     }
     
