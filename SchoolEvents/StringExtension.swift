@@ -22,10 +22,13 @@ extension String {
 
     public func utcToString(to format: String) -> String? {
         let formatter = DateFormatter()
+        formatter.calendar = Calendar.current
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         formatter.timeZone = TimeZone(abbreviation: "UTC")
         if let localDate = formatter.date(from: self) {
             let dateFormatter = DateFormatter()
+            dateFormatter.calendar = Calendar.current
+            dateFormatter.timeZone = TimeZone.current
             dateFormatter.locale = Locale.current
             dateFormatter.dateFormat = format
             return dateFormatter.string(from: localDate)
@@ -41,6 +44,7 @@ extension String {
     
     public func utcToDate() -> Date? {
         let formatter = DateFormatter()
+        formatter.calendar = Calendar.current
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         formatter.timeZone = TimeZone(abbreviation: "UTC")
         return formatter.date(from: self)
